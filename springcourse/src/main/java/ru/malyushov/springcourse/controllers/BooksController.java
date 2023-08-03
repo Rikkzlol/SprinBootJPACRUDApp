@@ -54,7 +54,7 @@ public class BooksController {
         if(bookOwner != null){
             model.addAttribute("owner",bookOwner);
         } else {
-            model.addAttribute("person", peopleService.findAll());
+            model.addAttribute("people", peopleService.findAll());
         }
         return "books/show";
 
