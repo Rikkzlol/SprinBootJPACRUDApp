@@ -102,8 +102,8 @@ public class BooksController {
     }
 
     @PostMapping("/search")
-    public String makeSearch(Model model, @RequestParam("quary") String quary){
-        model.addAttribute("books", booksService.findByTitle(quary));
+    public String makeSearch(Model model, @RequestParam("query") String query){
+        model.addAttribute("books", booksService.findByTitle(query));
         return "books/search";
     }
 

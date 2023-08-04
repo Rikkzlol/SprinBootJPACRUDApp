@@ -86,7 +86,7 @@ public class BooksService {
                 });
     }
 
-    public List<Book> findByTitle(String quary){
-        return booksRepository.findByTitleStartingWith(quary);
+    public List<Book> findByTitle(String query){
+        return booksRepository.findByTitleStartingWith(query);
     }
 }
