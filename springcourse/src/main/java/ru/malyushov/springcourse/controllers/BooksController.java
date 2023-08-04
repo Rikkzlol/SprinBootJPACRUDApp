@@ -95,4 +95,17 @@ public class BooksController {
         booksService.assign(id, selectedPerson);
         return "redirect:/books/" + id;
     }
+
+    @GetMapping("/search")
+    public String searchPge(){
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String makeSearch(Model model, @RequestParam("quary") String quary){
+        model.addAttribute("books", booksService.findByTitle(quary));
+        return "books/search";
+    }
+
+
 }

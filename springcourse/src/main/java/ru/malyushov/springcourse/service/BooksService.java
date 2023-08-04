@@ -5,10 +5,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.malyushov.springcourse.models.Book;
 import ru.malyushov.springcourse.models.Person;
 import ru.malyushov.springcourse.repositories.BooksRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +73,7 @@ public class BooksService {
         booksRepository.findById(id).ifPresent(
                 book -> {
                     book.setOwner(null);
+                    book.setTakenAt(null);
                 });
     }
 
@@ -79,8 +82,11 @@ public class BooksService {
         booksRepository.findById(id).ifPresent(
                 book -> {
                     book.setOwner(selectedPerson);
+                    book.setTakenAt(new Date());
                 });
     }
 
-
+    public List<Book> findByTitle(String quary){
+        return booksRepository.findByTitleStartingWith(quary);
+    }
 }

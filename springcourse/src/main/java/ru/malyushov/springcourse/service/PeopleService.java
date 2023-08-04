@@ -9,6 +9,7 @@ import ru.malyushov.springcourse.models.Person;
 import ru.malyushov.springcourse.repositories.PeopleRepository;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,13 @@ public class PeopleService {
         Optional<Person> person = peopleRepository.findById(id);
 
         if (person.isPresent()) {
+
+            person.get().getBooks().forEach(book -> {
+                long diffInMillies = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
+                if(diffInMillies > 864000000){ //10 суток в секундах
+                    book.setExpired(true);
+                }
+            });
 
             return person.get().getBooks();
         }
